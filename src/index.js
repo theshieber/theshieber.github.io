@@ -1,30 +1,27 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import React from "react";
-import * as ReactDOMClient from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "App";
+import ReactDOM from "react-dom/client";
+// https://reactjs.org/docs/context.html
+import { AppProvider } from "./appContext";
+// https://redux.js.org/tutorials/fundamentals/part-5-ui-react#passing-the-store-with-provider
+import { Provider } from "react-redux";
+import { store } from "./store";
+// https://create-react-app.dev/docs/adding-bootstrap
+import "bootstrap/dist/css/bootstrap.css";
+import App from "./App";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-const container = document.getElementById("root");
-
-// Create a root.
-const root = ReactDOMClient.createRoot(container);
+// https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={store}>
+    <AppProvider>
+      <App />
+    </AppProvider>
+  </Provider>
 );
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://cra.link/PWA
+serviceWorkerRegistration.register();
